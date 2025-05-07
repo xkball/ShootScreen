@@ -1,5 +1,8 @@
 package com.xkball.shoot_screen.utils;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.xkball.shoot_screen.ShootScreen;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -10,6 +13,8 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.packs.resources.Resource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
@@ -20,7 +25,10 @@ import net.minecraft.world.phys.Vec2;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.apache.commons.codec.binary.Base64;
+import org.jetbrains.annotations.Nullable;
+import org.lwjgl.opengl.GL30;
 
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -178,6 +186,18 @@ public class VanillaUtils {
         return startWithList;
     }
     
+    public static JsonElement readJsonFromResource(Resource resource) throws IOException {
+        try(var reader = resource.openAsReader()){
+            return JsonParser.parseReader(reader);
+        }
+    }
+    
+    @Nullable
+    public static <T> T pickRandom(List<T> list) {
+        if (list.isEmpty()) return null;
+        return list.get(RandomSource.create().nextInt(list.size()));
+    }
+    
     public static class ClientHandler {
         
         @OnlyIn(Dist.CLIENT)
@@ -192,5 +212,14 @@ public class VanillaUtils {
             buffer.addVertex(matrix, 0, 0, 100).setNormal(matrix, 0, 0, 1).setColor(0xFF0000FF);
         }
         
+        public static void copyFrameBufferColorTo(RenderTarget from, int to) {
+            GL30.glBindFramebuffer(GL30.GL_READ_FRAMEBUFFER, from.frameBufferId);
+            GL30.glBindFramebuffer(GL30.GL_DRAW_FRAMEBUFFER, to);
+            GL30.glBlitFramebuffer(0,0,from.width,from.height,
+                    0,0,from.width,from.height,
+                    GL30.GL_COLOR_BUFFER_BIT, GL30.GL_NEAREST);
+            GL30.glBindFramebuffer(GL30.GL_READ_FRAMEBUFFER, 0);
+            GL30.glBindFramebuffer(GL30.GL_DRAW_FRAMEBUFFER, 0);
+        }
     }
 }

@@ -6,11 +6,16 @@ import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 @FunctionalInterface
 public interface ThrowableSupplier<T> {
     
     Logger LOGGER = LogUtils.getLogger();
+    
+    static <T> Supplier<T> unwrapOrThrow(ThrowableSupplier<T> supplier) {
+        return () -> getOrThrow(supplier);
+    }
     
     static <T> T getOrThrow(ThrowableSupplier<T> supplier) {
         try {
