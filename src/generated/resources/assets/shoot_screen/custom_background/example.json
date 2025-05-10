@@ -1,0 +1,40 @@
+{
+  "ambientStrength": 0.2,
+  "lightColor": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "lightPos": [
+    1.7,
+    1.0,
+    2.0
+  ],
+  "moireStrength": 0.2,
+  "name": "example_background",
+  "screenRect": {
+    "leftDown": [
+      0.205,
+      0.339
+    ],
+    "leftUp": [
+      0.196,
+      0.9157
+    ],
+    "rightDown": [
+      0.81,
+      0.3347
+    ],
+    "rightUp": [
+      0.817,
+      0.9186
+    ]
+  },
+  "shininess": 32,
+  "specularStrength": 1.0,
+  "viewPos": [
+    0.6,
+    0.5,
+    1.0
+  ]
+}
