@@ -8,6 +8,8 @@ Press 'Z' to toggle of screenshot like rendering.
 
 Supprt custom background image and many other params.
 
+![](demo.png)
+
 ## Custom Background
 
 Put following files in a resource pack.
