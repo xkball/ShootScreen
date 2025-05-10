@@ -1,5 +1,7 @@
 package com.xkball.shoot_screen;
 
+import com.xkball.shoot_screen.client.postprocess.SSPostProcesses;
+import net.neoforged.fml.config.ModConfig;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -22,7 +24,11 @@ public class ShootScreen {
     public static volatile boolean enabled = true;
 
     public ShootScreen(IEventBus modEventBus, ModContainer modContainer) {
-
+        modContainer.registerConfig(ModConfig.Type.CLIENT, SSConfig.SPEC);
+    }
+    
+    public static boolean usingPostProcess() {
+        return SSPostProcesses.SHOOT_SCREEN_PROCESS != null && SSPostProcesses.SHOOT_SCREEN_PROCESS.ready() && enabled;
     }
     
     @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)

@@ -24,16 +24,16 @@ public class CustomBackgroundProvider extends JsonCodecProvider<CustomBackground
         this.unconditional(VanillaUtils.modRL("example"),
                 new CustomBackgroundData("example_background",
                         new CustomBackgroundData.ScreenRect(
-                                new Vector2f(0.106f,0.249f),
-                                new Vector2f(0.952f,0.256f),
-                                new Vector2f(0.951f,0.92f),
-                                new Vector2f(0.0879f,0.876f)),
+                                new Vector2f(0.205f,0.339f),
+                                new Vector2f(0.810f,0.3347f),
+                                new Vector2f(0.817f,0.9186f),
+                                new Vector2f(0.196f,0.9157f)),
                         new Vector3f(0.6f,0.5f,1f),
                         new Vector3f(1.7f,1.0f,2f),
                         new Vector3f(1f,1f,1f),
-                        0.6f,
                         0.2f,
-                        10f,
-                        16));
+                        0.2f,
+                        1f,
+                        32));
     }
 }

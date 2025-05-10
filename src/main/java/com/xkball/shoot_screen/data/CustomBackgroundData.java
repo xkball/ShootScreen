@@ -7,7 +7,6 @@ import com.xkball.shoot_screen.ShootScreen;
 import com.xkball.shoot_screen.client.postprocess.SSPostProcesses;
 import com.xkball.shoot_screen.utils.SSCodecs;
 import com.xkball.shoot_screen.utils.ThrowableFunction;
-import com.xkball.shoot_screen.utils.ThrowableSupplier;
 import com.xkball.shoot_screen.utils.VanillaUtils;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -33,7 +32,7 @@ public record CustomBackgroundData(String name,
                                    Vector3f viewPos,
                                    Vector3f lightPos,
                                    Vector3f lightColor,
-                                   float moorishStrength,
+                                   float moireStrength,
                                    float ambientStrength,
                                    float specularStrength,
                                    int shininess
@@ -45,7 +44,7 @@ public record CustomBackgroundData(String name,
             ExtraCodecs.VECTOR3F.fieldOf("viewPos").forGetter(CustomBackgroundData::viewPos),
             ExtraCodecs.VECTOR3F.fieldOf("lightPos").forGetter(CustomBackgroundData::lightPos),
             ExtraCodecs.VECTOR3F.fieldOf("lightColor").forGetter(CustomBackgroundData::lightColor),
-            Codec.FLOAT.fieldOf("moorishStrength").forGetter(CustomBackgroundData::moorishStrength),
+            Codec.FLOAT.fieldOf("moireStrength").forGetter(CustomBackgroundData::moireStrength),
             Codec.FLOAT.fieldOf("ambientStrength").forGetter(CustomBackgroundData::ambientStrength),
             Codec.FLOAT.fieldOf("specularStrength").forGetter(CustomBackgroundData::specularStrength),
             Codec.INT.fieldOf("shininess").forGetter(CustomBackgroundData::shininess)
@@ -60,7 +59,7 @@ public record CustomBackgroundData(String name,
                 new Vector4f(viewPos,0),
                 new Vector4f(lightPos,0),
                 new Vector4f(lightColor,0),
-                new Vector4f(moorishStrength,ambientStrength,specularStrength,shininess)
+                new Vector4f(moireStrength,ambientStrength,specularStrength,shininess)
         );
     }
     
@@ -99,14 +98,12 @@ public record CustomBackgroundData(String name,
             this.list = object;
             var data = VanillaUtils.pickRandom(list);
             if(data != null) {
-                ShootScreen.enabled = true;
                 CustomBackgroundData.currentUse = data;
                 if (SSPostProcesses.SHOOT_SCREEN_PROCESS != null) {
                     SSPostProcesses.SHOOT_SCREEN_PROCESS.update();
                 }
             }
             else {
-                ShootScreen.enabled = false;
                 CustomBackgroundData.currentUse = null;
             }
         }

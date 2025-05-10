@@ -1,25 +1,73 @@
 
-Installation information
+Shoot Screen
 =======
 
-This template repository can be directly cloned to get you started with a new
-mod. Simply create a new repository cloned from this one, by following the
-instructions provided by [GitHub](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
+Make your game screen look like a screenshot.
 
-Once you have your clone, simply open the repository in the IDE of your choice. The usual recommendation for an IDE is either IntelliJ IDEA or Eclipse.
+Press 'Z' to toggle of screenshot like rendering.
 
-If at any point you are missing libraries in your IDE, or you've run into problems you can
-run `gradlew --refresh-dependencies` to refresh the local cache. `gradlew clean` to reset everything 
-{this does not affect your code} and then start the process again.
+Supprt custom background image and many other params.
 
-Mapping Names:
-============
-By default, the MDK is configured to use the official mapping names from Mojang for methods and fields 
-in the Minecraft codebase. These names are covered by a specific license. All modders should be aware of this
-license. For the latest license text, refer to the mapping file itself, or the reference copy here:
-https://github.com/NeoForged/NeoForm/blob/main/Mojang.md
+## Custom Background
 
-Additional Resources: 
-==========
-Community Documentation: https://docs.neoforged.net/  
-NeoForged Discord: https://discord.neoforged.net/
+Put following files in a resource pack.
+
+```
+├───assets
+│   └───<namespace>
+│       └───custom_background
+│  			└─── <image_name>.json //background config
+│  		└───texutres
+│  			└───custom_background
+│  				└─── <image_name>.png
+```
+
+If there is more than one background, will apply a random one.
+
+```<image_name.json>
+//A background config example.
+{
+  "name": "example_background", //the image name.
+    "screenRect": {				//define the sreen corners in background.
+        "leftDown": [			//Percentage[0-1] form left down corner of iamge.
+          0.106,
+          0.249
+        ],
+        "leftUp": [
+          0.0879,
+          0.876
+        ],
+        "rightDown": [
+          0.952,
+          0.256
+        ],
+        "rightUp": [
+          0.951,
+          0.92
+        ]
+  },
+  "moireStrength": 0.6,	//Strength of Moiré pattern.Range[0,1]. 0 means no Moiré pattern.
+  "lightColor": [		//Following are the light parameters
+    1.0,
+    1.0,
+    1.0
+  ],
+  "lightPos": [
+    1.7,
+    1.0,
+    2.0
+  ],
+    "viewPos": [
+    0.6,
+    0.5,
+    1.0
+  ]
+  "ambientStrength": 0.2,
+  "specularStrength": 5,
+  "shininess": 16,
+}
+```
+
+About light parameters: this mod use Phong Lighting Model to simulate highlighting effects. The screen mapped to a rect from `(0,0,0)` to` (1,1,0) `and towards`(0,0,1)`.
+
+**If you just want to disable highlighing effects , set specular strength to 0.**

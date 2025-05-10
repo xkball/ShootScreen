@@ -17,7 +17,7 @@ public class MixinGameRenderer {
     
     @Inject(method = "render",at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;flush()V", shift = At.Shift.AFTER))
     public void afterRender(DeltaTracker deltaTracker, boolean renderLevel, CallbackInfo ci){
-        if(SSPostProcesses.SHOOT_SCREEN_PROCESS != null && ShootScreen.enabled) {
+        if(SSPostProcesses.SHOOT_SCREEN_PROCESS != null && ShootScreen.usingPostProcess()) {
             var mainBuffer = Minecraft.getInstance().getMainRenderTarget();
             SSPostProcesses.SHOOT_SCREEN_PROCESS.apply(mainBuffer.getColorTextureId());
             mainBuffer.bindWrite(true);

@@ -2,6 +2,7 @@ package com.xkball.shoot_screen.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.xkball.shoot_screen.ShootScreen;
 import com.xkball.shoot_screen.client.postprocess.SSPostProcesses;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.MouseHandler;
@@ -22,13 +23,9 @@ public class MixinMouseHandler {
     
     @Shadow private boolean mouseGrabbed;
     
-    @Shadow private double xpos;
-    
-    @Shadow private double ypos;
-    
     @WrapMethod(method = "onMove")
     public void wrapMouseMove(long windowPointer, double xPos, double yPos, Operation<Void> original){
-        if(SSPostProcesses.SHOOT_SCREEN_PROCESS != null && SSPostProcesses.SHOOT_SCREEN_PROCESS.ready()){
+        if(ShootScreen.usingPostProcess()){
             var remappedPos = shootScreen$remapMousePos(xPos, yPos);
             xPos = remappedPos.x;
             yPos = remappedPos.y;
@@ -38,7 +35,7 @@ public class MixinMouseHandler {
     
     @WrapMethod(method = "grabMouse")
     public void wrapGrabMouse(Operation<Void> original){
-        boolean flag = this.minecraft.isWindowActive() && !this.mouseGrabbed && SSPostProcesses.SHOOT_SCREEN_PROCESS != null && SSPostProcesses.SHOOT_SCREEN_PROCESS.ready();
+        boolean flag = this.minecraft.isWindowActive() && !this.mouseGrabbed && ShootScreen.usingPostProcess();
         original.call();
         if(flag){
             shootScreen$setMouseInRemappedCenter();
@@ -47,7 +44,7 @@ public class MixinMouseHandler {
     
     @WrapMethod(method = "releaseMouse")
     public void wrapReleaseMouse(Operation<Void> original){
-        boolean flag = this.mouseGrabbed && SSPostProcesses.SHOOT_SCREEN_PROCESS != null && SSPostProcesses.SHOOT_SCREEN_PROCESS.ready();
+        boolean flag = this.mouseGrabbed && ShootScreen.usingPostProcess();
         original.call();
         if(flag){
             shootScreen$setMouseInRemappedCenter();
