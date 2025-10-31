@@ -9,7 +9,8 @@
   "client": [
     "MixinGameRenderer",
     "MixinLevelRenderer",
-    "MixinMouseHandler"
+    "MixinMouseHandler",
+    "MixinWindow"
   ],
   "injectors": {
     "defaultRequire": 1

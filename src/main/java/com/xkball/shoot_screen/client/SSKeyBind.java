@@ -2,6 +2,8 @@ package com.xkball.shoot_screen.client;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import com.xkball.shoot_screen.ShootScreen;
+import com.xkball.shoot_screen.utils.VanillaUtils;
+import com.xkball.shoot_screen.utils.WindowState;
 import net.minecraft.client.KeyMapping;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -24,12 +26,15 @@ public class SSKeyBind {
     @EventBusSubscriber(bus = EventBusSubscriber.Bus.GAME, value = Dist.CLIENT)
     public static class GameEventHandler{
         
+        
         @SubscribeEvent
         public static void onKeyInput(InputEvent.Key event){
             if(event.getAction() != InputConstants.PRESS || !SWITCH_KEY.get().isActiveAndMatches(InputConstants.getKey(event.getKey(), event.getScanCode()))) return;
-            synchronized (ShootScreen.class){
-                ShootScreen.enabled = !ShootScreen.enabled;
-            }
+//            synchronized (ShootScreen.class){
+//                //ShootScreen.enabled = !ShootScreen.enabled;
+//            }
+            VanillaUtils.ClientHandler.switchWindowState();
+            
         }
     }
     

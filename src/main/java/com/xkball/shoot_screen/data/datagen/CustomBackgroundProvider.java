@@ -35,5 +35,47 @@ public class CustomBackgroundProvider extends JsonCodecProvider<CustomBackground
                         0.2f,
                         1f,
                         32));
+//        this.unconditional(VanillaUtils.modRL("image1"),
+//                new CustomBackgroundData("image1",
+//                        new CustomBackgroundData.ScreenRect(
+//                                new Vector2f(0.106f,0.249f),
+//                                new Vector2f(0.952f,0.256f),
+//                                new Vector2f(0.951f,0.92f),
+//                                new Vector2f(0.0879f,0.876f)),
+//                        new Vector3f(0.6f,0.5f,1f),
+//                        new Vector3f(1.7f,1.0f,2f),
+//                        new Vector3f(1f,1f,1f),
+//                        0.6f,
+//                        0.2f,
+//                        10f,
+//                        16));
+        this.unconditional(VanillaUtils.modRL("image2"),
+                new CustomBackgroundData("image2",
+                        new CustomBackgroundData.ScreenRect(
+                                new Vector2f(0.1468f,0.2833f),
+                                new Vector2f(0.8281f,0.3052f),
+                                new Vector2f(0.7906f,0.7771f),
+                                new Vector2f(0.1593f,0.7718f)),
+                        new Vector3f(0.6f,0.5f,1f),
+                        new Vector3f(1.7f,1.0f,2f),
+                        new Vector3f(1f,1f,1f),
+                        0.3f,
+                        0.2f,
+                        1f,
+                        16));
+        this.unconditional(VanillaUtils.modRL("image3"),
+                new CustomBackgroundData("image3",
+                        new CustomBackgroundData.ScreenRect(
+                                new Vector2f(0.0593f,0.1764f),
+                                new Vector2f(0.5593f,0.2117f),
+                                new Vector2f(0.5468f,0.7411f),
+                                new Vector2f(0.0625f,0.7458f)),
+                        new Vector3f(0.6f,0.5f,1f),
+                        new Vector3f(1.7f,1.0f,2f),
+                        new Vector3f(1f,1f,1f),
+                        0.3f,
+                        0.2f,
+                        1f,
+                        16));
     }
 }

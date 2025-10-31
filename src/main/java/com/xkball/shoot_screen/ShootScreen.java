@@ -1,6 +1,7 @@
 package com.xkball.shoot_screen;
 
 import com.xkball.shoot_screen.client.postprocess.SSPostProcesses;
+import com.xkball.shoot_screen.utils.TheSystemTray;
 import net.neoforged.fml.config.ModConfig;
 import org.slf4j.Logger;
 
@@ -21,7 +22,9 @@ public class ShootScreen {
     public static final String MODID = "shoot_screen";
     private static final Logger LOGGER = LogUtils.getLogger();
     
-    public static volatile boolean enabled = true;
+    public static volatile boolean enabled = false;
+    public static String currentWindowTitle = "";
+    public static TheSystemTray tray;
 
     public ShootScreen(IEventBus modEventBus, ModContainer modContainer) {
         modContainer.registerConfig(ModConfig.Type.CLIENT, SSConfig.SPEC);

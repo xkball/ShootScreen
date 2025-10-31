@@ -4,7 +4,7 @@
     "srcrgb": "one",
     "dstrgb": "zero"
   },
-  "vertex": "shoot_screen:shoot_screen_shader",
+  "vertex": "shoot_screen:blit",
   "fragment": "shoot_screen:shoot_screen_shader",
   "attributes": [ "Position" ],
   "samplers": [

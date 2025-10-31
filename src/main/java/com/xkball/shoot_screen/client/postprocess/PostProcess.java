@@ -32,6 +32,10 @@ public abstract class PostProcess {
                 1000f
         );
     }
+    
+    public void apply(RenderTarget target) {
+        this.apply(target.getColorTextureId());
+    }
 
     public abstract void apply(int inputTexture);
 
@@ -46,6 +50,13 @@ public abstract class PostProcess {
                 0.1f,
                 1000f
         );
+    }
+    
+    protected void processOnce(ShaderInstance shader,
+                               RenderTarget inputTexture,
+                               RenderTarget writeFramebuffer,
+                               UniformSetter uniformSetter){
+        this.processOnce(shader,inputTexture.getColorTextureId(),writeFramebuffer,uniformSetter);
     }
 
     protected void processOnce(

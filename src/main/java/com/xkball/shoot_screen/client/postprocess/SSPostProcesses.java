@@ -8,9 +8,13 @@ public class SSPostProcesses {
     @Nullable
     public static ShootScreenProcess SHOOT_SCREEN_PROCESS;
     
+    @Nullable
+    public static BloomPostProcess BLOOM;
+    
     public static void createPostProcess() {
         var window = Minecraft.getInstance().getWindow();
         SHOOT_SCREEN_PROCESS = new ShootScreenProcess(window.getWidth(), window.getHeight());
+        
     }
     
     public static void resize(int width, int height) {
